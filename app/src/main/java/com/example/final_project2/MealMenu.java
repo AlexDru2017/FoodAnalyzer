@@ -21,6 +21,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class MealMenu extends AppCompatActivity {
@@ -28,11 +29,16 @@ public class MealMenu extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1000;
     private static final int WRITE_EXTERNAL_STORAGE_CODE = 1000;
 
+
+    private Population population;
+    private int generationCount;
+
+
     private FirebaseUser user;
 
     private ArrayList<Upload> mUploads;
 
-    private ArrayList<Meal> mMeal;
+    private static ArrayList<Meal> mMeal;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +48,31 @@ public class MealMenu extends AppCompatActivity {
         mUploads = (ArrayList<Upload>) args.getSerializable("mUploads");
         mMeal = (ArrayList<Meal>) args.getSerializable("mMeal");
         user = FirebaseAuth.getInstance().getCurrentUser();
+        population = new Population();
+        generationCount = 0;
+
+        //MealMenu demo = new MealMenu();
+
+        //Initialize population
+        population.initializePopulation(10);
+        Toast.makeText(MealMenu.this, "aaaaaaaaa", Toast.LENGTH_LONG).show();
+
 
     }
 
+    public static ArrayList<Meal> getmMeal() {
+        return mMeal;
+    }
+
+    public static void setmMeal(ArrayList<Meal> mMeal) {
+        MealMenu.mMeal = mMeal;
+    }
+
 }
+
+
+
+
+
 
 
