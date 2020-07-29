@@ -16,7 +16,7 @@
 
 
         <activity
-            android:name=".HomePage"
+            android:name=".Harris_Benedict"
             android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,7 @@
         <activity android:name=".NutritionalValues" />
         <activity android:name=".ModelSettings" />
         <activity android:name=".MealMenu" />
+        <activity android:name=".HomePage" />
 
         <activity
             android:name="com.soundcloud.android.crop.CropImageActivity"

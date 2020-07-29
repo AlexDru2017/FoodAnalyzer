@@ -38,13 +38,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="-33dp"
-        android:layout_marginLeft="-33dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="145dp"
         android:layout_marginBottom="7dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/todo"
         android:maxWidth="175dp"
         android:maxHeight="195dp"
+        android:paddingRight="50dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/salad" />
 
@@ -76,6 +76,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/labAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Age"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:fontFamily="@font/david_libre" />
+
                 <EditText
                     android:id="@+id/editTextAge"
                     android:layout_width="wrap_content"
@@ -85,25 +95,6 @@
                     android:inputType="numberSigned"
                     android:paddingLeft="15dp" />
 
-                <TextView
-                    android:id="@+id/Age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:fontFamily="@font/david_libre" />
-
-                <TextView
-                    android:id="@+id/labAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:text="Age."
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:fontFamily="@font/david_libre" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -111,7 +102,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/labGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Gender"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:fontFamily="@font/david_libre" />
+
                 <RadioGroup
+                    android:id="@+id/radioGroupGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -131,31 +133,12 @@
 
                 </RadioGroup>
 
-                <TextView
-                    android:id="@+id/labGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:text="Gender"
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:fontFamily="@font/david_libre" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="numberSigned"
-                    android:paddingLeft="15dp" />
 
                 <TextView
                     android:id="@+id/labWeight"
@@ -167,14 +150,14 @@
                     android:textSize="24sp"
                     app:fontFamily="@font/david_libre" />
 
-                <TextView
-                    android:id="@+id/Weight"
+                <EditText
+                    android:id="@+id/editTextWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:fontFamily="@font/david_libre" />
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberSigned"
+                    android:paddingLeft="15dp" />
 
             </LinearLayout>
 
@@ -182,15 +165,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextHeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="numberSigned"
-                    android:paddingLeft="15dp" />
 
                 <TextView
                     android:id="@+id/labHeight"
@@ -202,14 +176,14 @@
                     android:textSize="24sp"
                     app:fontFamily="@font/david_libre" />
 
-                <TextView
-                    android:id="@+id/Height"
+                <EditText
+                    android:id="@+id/editTextHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    app:fontFamily="@font/david_libre" />
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberSigned"
+                    android:paddingLeft="15dp" />
 
             </LinearLayout>
 
@@ -302,5 +276,17 @@
         android:textColor="#000000"
         android:textSize="24sp"
         app:fontFamily="@font/david_libre" />
+
+    <Button
+        android:id="@+id/buttonTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="71dp"
+        android:layout_marginRight="71dp"
+        android:layout_marginBottom="17dp"
+        android:text="test" />
 
 </RelativeLayout>
