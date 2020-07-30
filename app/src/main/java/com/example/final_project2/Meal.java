@@ -7,14 +7,21 @@ public class Meal implements Serializable {
     String mealName;
     double cal;
 
+
     public Meal(String mealName) {
         this.mealName = mealName;
         cal = 0;
+
     }
 
     public Meal(String mealName, String cal) {
         this.mealName = mealName;
         this.cal = Double.parseDouble(cal);
+    }
+
+    public Meal(String mealName, double cal) {
+        this.mealName = mealName;
+        this.cal = cal;
     }
 
     public String getMealName() {
@@ -32,6 +39,7 @@ public class Meal implements Serializable {
     public void setCal(double cal) {
         this.cal = cal;
     }
+
 
     @Override
     public String toString() {
