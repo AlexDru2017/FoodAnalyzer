@@ -99,6 +99,7 @@ public class Harris_Benedict extends AppCompatActivity {
                     bmr = 665 + (9.563 * sWeight) + (1.850 * sHeight) - (4.676 * sAge);
                 }
                 calConsuption = (int) (bmr * sportActivityArray[sportActivity] * 1.1);
+                Toast.makeText(Harris_Benedict.this, Integer.toString(calConsuption), Toast.LENGTH_LONG).show();
             }
         });
     }

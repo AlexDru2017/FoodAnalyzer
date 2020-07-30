@@ -29,11 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_layout);
 
 
-
         inputEmail = (EditText) findViewById(R.id.email_reg);
         inputPassword = (EditText) findViewById(R.id.password_reg);
-       btnSignup = (Button) findViewById(R.id.btn_signup);
-       btnLogin = (Button) findViewById(R.id.sign_up_button);
+        btnSignup = (Button) findViewById(R.id.btn_signup);
+        btnLogin = (Button) findViewById(R.id.sign_up_button);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -83,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(LoginActivity.this, HomePage.class);
+                                    Intent intent = new Intent(LoginActivity.this, Harris_Benedict.class);
                                     intent.putExtra("login", inputEmail.getText().toString());
                                     startActivity(intent);
                                 }
