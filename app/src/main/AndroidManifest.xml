@@ -16,7 +16,7 @@
 
 
         <activity
-            android:name=".Welcome"
+            android:name=".Harris_Benedict"
             android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
 
         <activity android:name=".History" />
         <activity android:name=".ChooseModel" />
-        <activity android:name=".Harris_Benedict" />
+        <activity android:name=".Welcome" />
         <activity android:name=".AddFoodItems" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".UploadImageActivity" />

@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
 
                                     Intent intent = new Intent(LoginActivity.this, Harris_Benedict.class);
-                                    intent.putExtra("login", inputEmail.getText().toString());
+                                    // intent.putExtra("login", inputEmail.getText().toString());
                                     startActivity(intent);
                                 }
                             }

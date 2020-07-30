@@ -1,22 +1,17 @@
 package com.example.final_project2;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class Harris_Benedict extends AppCompatActivity {
 
@@ -26,12 +21,13 @@ public class Harris_Benedict extends AppCompatActivity {
 
     private RadioGroup radioGroup;
 
-    private Button test;
+    private Button calculateBT;
+    private Button nextBT;
 
     private Spinner spinner;
 
     private Double bmr;
-    private static int calConsuption;
+    private static Integer calConsuption;
 
     private double[] sportActivityArray;
 
@@ -51,8 +47,20 @@ public class Harris_Benedict extends AppCompatActivity {
         height = findViewById(R.id.editTextHeight);
         radioGroup = findViewById(R.id.radioGroupGender);
         sportActivityArray = new double[]{1.2, 1.375, 1.55, 1.725, 1.9};
-        test = findViewById(R.id.buttonTest);
-        test.setOnClickListener(new View.OnClickListener() {
+        calculateBT = findViewById(R.id.buttonTest);
+        nextBT = findViewById(R.id.nextButton);
+        nextBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(calConsuption == null)) {
+                    Intent intentRegister = new Intent(Harris_Benedict.this, HomePage.class);
+                    startActivity(intentRegister);
+                } else {
+                    Toast.makeText(Harris_Benedict.this, "Please calculate cal first", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        calculateBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int sAge;
