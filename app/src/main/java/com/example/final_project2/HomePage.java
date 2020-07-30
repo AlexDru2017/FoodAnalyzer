@@ -34,6 +34,7 @@ public class HomePage extends AppCompatActivity {
     private TextView userName;
     private LinearLayout UplodePoto;
     private LinearLayout History;
+    private LinearLayout ProgramDiet;
     private Button About;
     private Button Menu;
     private ArrayList<Upload> mUploads;
@@ -54,11 +55,18 @@ public class HomePage extends AppCompatActivity {
         userName = (TextView) findViewById(R.id.txtUserName);
         UplodePoto = (LinearLayout) findViewById(R.id.btnUplodePoto);
         History = (LinearLayout) findViewById(R.id.btnHistory);
+        ProgramDiet = (LinearLayout) findViewById(R.id.btnProgramDiet);
         About = (Button) findViewById(R.id.btnAbout);
         Menu = (Button) findViewById(R.id.btnMenu1);
 
         userName.setText(user.getEmail().split("@")[0]);
 
+        ProgramDiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dietProgram();
+            }
+        });
 
         UplodePoto.setOnClickListener(new View.OnClickListener() {
             @Override

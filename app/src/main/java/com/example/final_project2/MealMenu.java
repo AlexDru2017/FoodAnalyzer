@@ -50,15 +50,33 @@ public class MealMenu extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         population = new Population();
         generationCount = 0;
+        int numOfGeneration =0;
 
         //MealMenu demo = new MealMenu();
 
         //Initialize population
-        population.initializePopulation(10);
+        population.initializePopulation(5);//לשנות ל10
+
+        //Check if the calories the user consumes are equal to what he needs to consumes.
+        while (population.checkDistance()==0 && numOfGeneration<10)
+        {
+
+            selection();
+
+            crossover();
+
+
+
+
+        }
+
+
+
         Toast.makeText(MealMenu.this, "aaaaaaaaa", Toast.LENGTH_LONG).show();
 
 
     }
+
 
     public static ArrayList<Meal> getmMeal() {
         return mMeal;
@@ -67,6 +85,20 @@ public class MealMenu extends AppCompatActivity {
     public static void setmMeal(ArrayList<Meal> mMeal) {
         MealMenu.mMeal = mMeal;
     }
+
+    void selection()
+    {
+        //Calculate fitness of each individual
+        population.calculateFitness();
+
+        //create new generation of individual
+        population.getNewIndividual();
+    }
+
+    private void crossover() {
+        population.crossoverOfParent();
+    }
+
 
 }
 
