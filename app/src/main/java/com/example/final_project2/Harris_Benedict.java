@@ -25,16 +25,15 @@ public class Harris_Benedict extends AppCompatActivity {
     private TextView height;
 
     private RadioGroup radioGroup;
-    private RadioButton radioMale;
-    private RadioButton radioFemale;
 
     private Button test;
 
     private Spinner spinner;
 
-    private Double calorieConsumption;
+    private Double bmr;
+    private static int calConsuption;
 
-    private ArrayList<Double> sportActivityArray;
+    private double[] sportActivityArray;
 
 
     @Override
@@ -51,7 +50,7 @@ public class Harris_Benedict extends AppCompatActivity {
         weight = findViewById(R.id.editTextWeight);
         height = findViewById(R.id.editTextHeight);
         radioGroup = findViewById(R.id.radioGroupGender);
-        sportActivityArray=new ArrayList<>();
+        sportActivityArray = new double[]{1.2, 1.375, 1.55, 1.725, 1.9};
         test = findViewById(R.id.buttonTest);
         test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +59,7 @@ public class Harris_Benedict extends AppCompatActivity {
                 int sWeight;
                 int sHeight;
                 boolean isMale = false;
-                long sportActivity;
+                int sportActivity;
 
                 if (!age.getText().toString().matches("")) {
                     sAge = Integer.parseInt(age.getText().toString());
@@ -91,14 +90,25 @@ public class Harris_Benedict extends AppCompatActivity {
                         isMale = false;
                         break;
                 }
-                sportActivity = spinner.getSelectedItemId();
+                sportActivity = (int) spinner.getSelectedItemId();
                 if (isMale) {
                     //BMR = 66.5 + ( 13.75 × weight in kg ) + ( 5.003 × height in cm ) – ( 6.755 × age in years )
+                    bmr = 66.5 + (13.75 * sWeight) + (5.003 * sHeight) - (6.755 * sAge);
                 } else {
-
+                    // BMR = 655 + (9.563 ×weight in kg )+(1.850 ×height in cm ) –(4.676 ×age in years )
+                    bmr = 665 + (9.563 * sWeight) + (1.850 * sHeight) - (4.676 * sAge);
                 }
+                calConsuption = (int) (bmr * sportActivityArray[sportActivity] * 1.1);
             }
         });
+    }
+
+    public static int getCalConsuption() {
+        return calConsuption;
+    }
+
+    public static void setCalConsuption(int calConsuption) {
+        Harris_Benedict.calConsuption = calConsuption;
     }
 
     private void setSpinner() {
@@ -109,9 +119,5 @@ public class Harris_Benedict extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-    }
-
-    private void hbEquation() {
-
     }
 }
