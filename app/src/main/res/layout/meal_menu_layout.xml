@@ -31,10 +31,26 @@
         android:padding="3dp"
         android:layout_marginStart="0dp">
 
+        <Button
+            android:id="@+id/btnMenu1"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/ic_menu" />
+
 
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="317dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/ic_info1" />
 
 
 
@@ -62,8 +78,8 @@
         app:srcCompat="@drawable/pag1" />
 
 
-    <TextView
-        android:id="@+id/textView1"
+     <TextView
+        android:id="@+id/meal_menu_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
@@ -75,11 +91,222 @@
         android:textStyle="bold"
         app:fontFamily="@font/david_libre" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout_Labels"
+        android:layout_width="match_parent"
+        android:layout_height="301dp"
+        android:layout_marginTop="260dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/labels"
+            android:layout_width="371dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/title_lab"
+                    android:layout_width="230dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="Food's Name"
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/david_libre" />
+
+                <TextView
+                    android:id="@+id/title_cal"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text="Quantity"
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/david_libre" />
 
 
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/labgene1"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+                <TextView
+                    android:id="@+id/cal1"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labgene2"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+                <TextView
+                    android:id="@+id/cal2"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labgene3"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+                <TextView
+                    android:id="@+id/cal3"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labgene4"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+                <TextView
+                    android:id="@+id/cal4"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labgene5"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+                <TextView
+                    android:id="@+id/cal5"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    app:fontFamily="@font/david_libre" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/butSave"
+        android:layout_width="117dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="600dp"
+        android:background="#F28729"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/butRefresh"
+        android:layout_width="117dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="600dp"
+        android:background="#F28729"
+        android:text="Refresh" />
 
 
 
@@ -91,15 +318,10 @@
         android:layout_height="195dp"
         android:layout_marginBottom="1000dp"
         android:layout_marginLeft="-80dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="640dp"
         app:srcCompat="@drawable/salad"
         android:contentDescription="@string/todo"
         android:layout_marginStart="-80dp" />
-
-
-
-
-
 
 
 

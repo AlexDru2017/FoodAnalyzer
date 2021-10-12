@@ -75,13 +75,37 @@
         android:textStyle="bold"
         app:fontFamily="@font/david_libre" />
 
+    <TextView
+    android:id="@+id/txt1"
+    android:layout_width="371dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="230dp"
+    android:layout_marginLeft="10dp"
+    android:gravity="center"
+    android:text="Link for training the model :"
+    android:textColor="#000000"
+    android:textSize="25sp"
+    app:fontFamily="@font/david_libre" />
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:text="https://colab.research.google.com/drive/1arEDplDLb3rcf8zg3b_872WUWSCVNmA4?usp=sharing"
+        android:textColor="#0000ff"
+        android:textSize="17sp"
+        app:fontFamily="@font/david_libre" />
+
     <Button
         android:id="@+id/chooseModel"
         android:layout_width="160dp"
         android:layout_height="41dp"
         android:layout_marginStart="95dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="350dp"
         android:background="#F28729"
         android:drawableLeft="@drawable/ic_person"
         android:text="choose model"
@@ -97,7 +121,7 @@
         android:layout_height="41dp"
         android:layout_marginStart="95dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="355dp"
+        android:layout_marginTop="405dp"
         android:background="#F28729"
         android:drawableLeft="@drawable/ic_settings"
         android:text="choose label"
@@ -109,7 +133,7 @@
         android:layout_height="41dp"
         android:layout_marginStart="95dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="460dp"
         android:background="#F28729"
         android:drawableLeft="@drawable/ic_settings"
         android:text="save model"
@@ -121,7 +145,7 @@
         android:layout_height="195dp"
         android:layout_marginBottom="1000dp"
         android:layout_marginLeft="-80dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="640dp"
         app:srcCompat="@drawable/salad"
         android:contentDescription="@string/todo"
         android:layout_marginStart="-80dp" />

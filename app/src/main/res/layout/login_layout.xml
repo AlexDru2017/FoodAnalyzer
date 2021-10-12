@@ -140,7 +140,7 @@
         android:layout_height="195dp"
         android:layout_marginBottom="1000dp"
         android:layout_marginLeft="-80dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="640dp"
         app:srcCompat="@drawable/salad"
         android:contentDescription="@string/todo1" />
     |>

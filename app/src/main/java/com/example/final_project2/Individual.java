@@ -30,7 +30,7 @@ public class Individual {
 
     }
 
-    public ArrayList<Meal> getGenes() {
+    public ArrayList<Meal> getGenes()    {
         return genes;
     }
 
@@ -50,7 +50,7 @@ public class Individual {
     public void calcFitness() {
 
         calcDistance();
-        fitness = (float) 1.0/(1 + distance)*100;
+        fitness = (float) 1.0 / (1 + distance) * 100;
 
 
     }
@@ -58,16 +58,26 @@ public class Individual {
     //    calc Distance
     public int calcDistance() {
         int sum = 0;
-        int calForUser = 250; //צריך לבוא מהחלון של נתוני המתשתמש , חישוב קלוריות לפי גובה משקל..
+        int calForUser = 2600; //צריך לבוא מהחלון של נתוני המתשתמש , חישוב קלוריות לפי גובה משקל..
+        if(Harris_Benedict.getCalConsuption()!=0)
+        {
+            calForUser = Harris_Benedict.getCalConsuption(); //צריך לבוא מהחלון של נתוני המתשתמש , חישוב קלוריות לפי גובה משקל..
+        }
         for (int i = 0; i < geneLength; i++) {
             sum = sum + (int) genes.get(i).getCal();
         }
-
+        calForUser = calForUser / 10;
         distance = Math.abs(sum - calForUser);
         return distance;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Individual{" +
+                "fitness=" + fitness +
+                ", genes=" + genes +
+                ", geneLength=" + geneLength +
+                ", distance=" + distance +
+                '}';
+    }
 }

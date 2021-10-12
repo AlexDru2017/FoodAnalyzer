@@ -109,12 +109,12 @@
         android:id="@+id/imageView5"
         android:layout_width="175dp"
         android:layout_height="195dp"
-        android:layout_marginBottom="1000dp"
+        android:layout_marginStart="-80dp"
         android:layout_marginLeft="-80dp"
-        android:layout_marginTop="490dp"
-        app:srcCompat="@drawable/salad"
+        android:layout_marginTop="640dp"
+        android:layout_marginBottom="1000dp"
         android:contentDescription="@string/todo"
-        android:layout_marginStart="-80dp" />
+        app:srcCompat="@drawable/salad" />
 
 
 

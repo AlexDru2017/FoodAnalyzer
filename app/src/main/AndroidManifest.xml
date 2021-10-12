@@ -16,8 +16,8 @@
 
 
         <activity
-            android:name=".Harris_Benedict"
-            android:screenOrientation="fullSensor">
+            android:name=".Welcome"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
 
         <activity android:name=".History" />
         <activity android:name=".ChooseModel" />
-        <activity android:name=".Welcome" />
+        <activity android:name=".Harris_Benedict" />
         <activity android:name=".AddFoodItems" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".UploadImageActivity" />
@@ -37,12 +37,10 @@
         <activity android:name=".Classify" />
         <activity android:name=".NutritionalValues" />
         <activity android:name=".ModelSettings" />
-        <activity android:name=".MealMenu" />
         <activity android:name=".HomePage" />
+        <activity android:name=".MealMenu" />
 
-        <activity
-            android:name="com.soundcloud.android.crop.CropImageActivity"
-            android:screenOrientation="fullSensor" />
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
 
         <meta-data

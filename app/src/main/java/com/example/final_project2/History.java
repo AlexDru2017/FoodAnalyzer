@@ -1,6 +1,7 @@
 package com.example.final_project2;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,9 @@ public class History extends AppCompatActivity implements MyAdapter.OnItemClickL
     private String loginEmail;
     private Button About;
     private Button Menu;
+
+    private ArrayList<Meal> mMeal;
+    private ProgressDialog mProgressDialog;
 
 
     private ProgressBar mProgressCircle;
@@ -162,7 +167,8 @@ public class History extends AppCompatActivity implements MyAdapter.OnItemClickL
                             case R.id.program_diet_item:
 
                                 // need to do
-                                Toast.makeText(History.this, "Need to do", Toast.LENGTH_LONG).show();
+                                Toast.makeText(History.this, "program diet", Toast.LENGTH_LONG).show();
+                                dietProgram();
                                 return true;
 
                             case R.id.settings_item:
@@ -189,6 +195,90 @@ public class History extends AppCompatActivity implements MyAdapter.OnItemClickL
 
 
     }
+
+    private void dietProgram() {
+        mUploads = new ArrayList<>();
+        mMeal = new ArrayList<>();
+        readData(FirebaseDatabase.getInstance().getReference("images/" + user.getUid()), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                mUploads.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    final Upload upload = postSnapshot.getValue(Upload.class);
+                    upload.setKey(postSnapshot.getKey());
+                    mUploads.add(upload);
+                    // nutritionalValuesFromFirebase(upload.getName());
+                    readData(FirebaseDatabase.getInstance().getReference().child("nutritional_values").child(upload.getName()), new OnGetDataListener() {
+                        @Override
+                        public void onStart() {
+                        }
+
+                        @Override
+                        public void onSuccess(DataSnapshot data) {
+                            FoodModel foodModel = data.getValue(FoodModel.class);
+                            Log.d("MealMenu", data.getValue(FoodModel.class).toString());
+                            // [START_EXCLUDE]
+                            if (foodModel == null) {
+                                // User is null, error out
+                                Toast.makeText(History.this, "No Data", Toast.LENGTH_LONG).show();
+                            } else {
+                                mMeal.add(new Meal(upload.getName(), foodModel.getEnergy()));
+                            }
+                            if (mUploads.size() == mMeal.size()) {
+                                mProgressDialog.dismiss();
+                                Intent intentProgramDiet = new Intent(History.this, MealMenu.class);
+                                Bundle args = new Bundle();
+                                args.putSerializable("mMeal", (Serializable) mMeal);
+                                args.putSerializable("mUploads", (Serializable) mUploads);
+                                intentProgramDiet.putExtra("BUNDLE", args);
+                                // intentProgramDiet.putParcelableArrayListExtra("mMeal", mMeal);
+                                //intentProgramDiet.putParcelableArrayListExtra("mUploads", mUploads);
+                                startActivity(intentProgramDiet);
+                            }
+                        }
+
+                        @Override
+                        public void onFailed(DatabaseError databaseError) {
+
+                        }
+                    });
+                    // mProgressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailed(DatabaseError databaseError) {
+
+            }
+
+            @Override
+            public void onStart() {
+                //when starting
+                mProgressDialog = new ProgressDialog(History.this);
+                mProgressDialog.setMessage("Retrieving data...");
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
+            }
+        });
+
+    }
+
+    public void readData(DatabaseReference mDatabase, final OnGetDataListener listener) {
+        listener.onStart();
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailed(databaseError);
+            }
+        });
+    }
+
+
 
     @Override
     public void onItemClick(int position) {

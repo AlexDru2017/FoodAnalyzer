@@ -40,8 +40,8 @@
         android:id="@+id/btnAbout"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_marginLeft="350dp"
         android:layout_marginTop="3dp"
-        android:layout_marginLeft="317dp"
         android:background="@drawable/ic_info1" />
 
 
@@ -117,17 +117,7 @@
             android:textSize="25sp"
             app:fontFamily="@font/david_libre" />
 
-        <TextView
-            android:id="@+id/proteinTxt_val"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="335dp"
-            android:text="g"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:fontFamily="@font/david_libre" />
+
 
         <TextView
             android:id="@+id/EnergyTxt"
@@ -153,17 +143,7 @@
             android:textSize="25sp"
             app:fontFamily="@font/david_libre" />
 
-    <TextView
-        android:id="@+id/EnergyTxt_val"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="370dp"
-        android:text="kcal"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        app:fontFamily="@font/david_libre" />
+
 
     <TextView
             android:id="@+id/SugarsTxt"
@@ -190,20 +170,9 @@
             app:fontFamily="@font/david_libre" />
 
 
-        <TextView
-            android:id="@+id/SugarsTxt_val"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="405dp"
-            android:text="g"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:fontFamily="@font/david_libre" />
 
 
-        <TextView
+    <TextView
             android:id="@+id/fatTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -227,17 +196,7 @@
             android:textSize="25sp"
             app:fontFamily="@font/david_libre" />
 
-        <TextView
-            android:id="@+id/fatTxt_val"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="435dp"
-            android:text="g"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:fontFamily="@font/david_libre" />
+
 
         <TextView
             android:id="@+id/CarbohydrateTxt"
@@ -263,17 +222,7 @@
             android:textSize="25sp"
             app:fontFamily="@font/david_libre" />
 
-        <TextView
-            android:id="@+id/CarbohydrateTxt_val"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="470dp"
-            android:text="g"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:fontFamily="@font/david_libre" />
+
 
 
     <Button

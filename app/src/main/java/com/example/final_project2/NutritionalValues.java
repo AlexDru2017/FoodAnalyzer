@@ -26,8 +26,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -38,6 +41,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 import usdaFood.app.USDApp;
 import usdaFood.usda.USDAClient;
@@ -47,6 +52,10 @@ public class NutritionalValues extends AppCompatActivity {
     //Menu && About
     private Button About;
     private Button Menu;
+
+    private ArrayList<Meal> mMeal;
+    private ProgressDialog mProgressDialog;
+    private ArrayList<Upload> mUploads;
 
     //save image in data base
     private Button save_button;
@@ -166,8 +175,9 @@ public class NutritionalValues extends AppCompatActivity {
 
                             case R.id.program_diet_item:
 
-                                // need to do
                                 Toast.makeText(NutritionalValues.this, "Need to do", Toast.LENGTH_LONG).show();
+                                dietProgram();
+
                                 return true;
 
                             case R.id.settings_item:
@@ -206,6 +216,89 @@ public class NutritionalValues extends AppCompatActivity {
         });
     }
 
+    private void dietProgram() {
+        mUploads = new ArrayList<>();
+        mMeal = new ArrayList<>();
+        readData(FirebaseDatabase.getInstance().getReference("images/" + user.getUid()), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                mUploads.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    final Upload upload = postSnapshot.getValue(Upload.class);
+                    upload.setKey(postSnapshot.getKey());
+                    mUploads.add(upload);
+                    // nutritionalValuesFromFirebase(upload.getName());
+                    readData(FirebaseDatabase.getInstance().getReference().child("nutritional_values").child(upload.getName()), new OnGetDataListener() {
+                        @Override
+                        public void onStart() {
+                        }
+
+                        @Override
+                        public void onSuccess(DataSnapshot data) {
+                            FoodModel foodModel = data.getValue(FoodModel.class);
+                            Log.d("MealMenu", data.getValue(FoodModel.class).toString());
+                            // [START_EXCLUDE]
+                            if (foodModel == null) {
+                                // User is null, error out
+                                Toast.makeText(NutritionalValues.this, "No Data", Toast.LENGTH_LONG).show();
+                            } else {
+                                mMeal.add(new Meal(upload.getName(), foodModel.getEnergy()));
+                            }
+                            if (mUploads.size() == mMeal.size()) {
+                                mProgressDialog.dismiss();
+                                Intent intentProgramDiet = new Intent(NutritionalValues.this, MealMenu.class);
+                                Bundle args = new Bundle();
+                                args.putSerializable("mMeal", (Serializable) mMeal);
+                                args.putSerializable("mUploads", (Serializable) mUploads);
+                                intentProgramDiet.putExtra("BUNDLE", args);
+                                // intentProgramDiet.putParcelableArrayListExtra("mMeal", mMeal);
+                                //intentProgramDiet.putParcelableArrayListExtra("mUploads", mUploads);
+                                startActivity(intentProgramDiet);
+                            }
+                        }
+
+                        @Override
+                        public void onFailed(DatabaseError databaseError) {
+
+                        }
+                    });
+                    // mProgressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailed(DatabaseError databaseError) {
+
+            }
+
+            @Override
+            public void onStart() {
+                //when starting
+                mProgressDialog = new ProgressDialog(NutritionalValues.this);
+                mProgressDialog.setMessage("Retrieving data...");
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
+            }
+        });
+
+    }
+
+    public void readData(DatabaseReference mDatabase, final OnGetDataListener listener) {
+        listener.onStart();
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailed(databaseError);
+            }
+        });
+    }
+
+
     private void searchItemMeasureStringRequest(String ndbno) {
         try {
             USDApp usdApp = new USDApp();
@@ -221,27 +314,27 @@ public class NutritionalValues extends AppCompatActivity {
                     case "203":
                         id_Protein = (String) nutrient.get("name");
                         value_Protein = foodNutrient.get("amount").toString();
-                        protein.setText(value_Protein);
+                        protein.setText(value_Protein+"  g");
                         break;
                     case "208":
                         id_Energy = (String) nutrient.get("name");
                         value_Energy = foodNutrient.get("amount").toString();
-                        energy.setText(value_Energy);
+                        energy.setText(value_Energy+"  kcal");
                         break;
                     case "269":
                         id_Sugars = (String) nutrient.get("name");
                         value_Sugars = foodNutrient.get("amount").toString();
-                        sugars.setText(value_Sugars);
+                        sugars.setText(value_Sugars+"  g");
                         break;
                     case "204":
                         id_Fat = (String) nutrient.get("name");
                         value_fat = foodNutrient.get("amount").toString();
-                        fat.setText(value_fat);
+                        fat.setText(value_fat+"  g");
                         break;
                     case "205":
                         id_Carbohydrate = (String) nutrient.get("name");
                         value_Carbohydrate = foodNutrient.get("amount").toString();
-                        carbohydrate.setText(value_Carbohydrate);
+                        carbohydrate.setText(value_Carbohydrate+"  g");
                         break;
                 }
             }
@@ -263,23 +356,23 @@ public class NutritionalValues extends AppCompatActivity {
                 JSONObject labelNutrients = jsonObject.getJSONObject("labelNutrients");
                 id_Protein = "Protein";
                 value_Protein = ((JSONObject) labelNutrients.get("protein")).get("value").toString();
-                protein.setText(value_Protein);
+                protein.setText(value_Protein+"  g");
 
                 id_Energy = "Energy";
                 value_Energy = ((JSONObject) labelNutrients.get("calories")).get("value").toString();
-                energy.setText(value_Energy);
+                energy.setText(value_Energy+"  kcal");
 
                 id_Sugars = "Sugars";
                 value_Sugars = ((JSONObject) labelNutrients.get("sugars")).get("value").toString();
-                sugars.setText(value_Sugars);
+                sugars.setText(value_Sugars+"  g");
 
                 id_Fat = "Fat";
                 value_fat = ((JSONObject) labelNutrients.get("fat")).get("value").toString();
-                fat.setText(value_fat);
+                fat.setText(value_fat+"  g");
 
                 id_Carbohydrate = "Carb";
                 value_Carbohydrate = ((JSONObject) labelNutrients.get("carbohydrates")).get("value").toString();
-                carbohydrate.setText(value_Carbohydrate);
+                carbohydrate.setText(value_Carbohydrate+"  g");
             } catch (JSONException e) {
                 JSONArray foodNutrients = jsonObject.getJSONArray("foodNutrients");
                 for (int i = 0; i < foodNutrients.length(); i++) {
@@ -290,27 +383,27 @@ public class NutritionalValues extends AppCompatActivity {
                         case "203":
                             id_Protein = (String) nutrient.get("name");
                             value_Protein = foodNutrient.get("amount").toString();
-                            protein.setText(value_Protein);
+                            protein.setText(value_Protein+"  g");
                             break;
                         case "208":
                             id_Energy = (String) nutrient.get("name");
                             value_Energy = foodNutrient.get("amount").toString();
-                            energy.setText(value_Energy);
+                            energy.setText(value_Energy+"  kcal");
                             break;
                         case "269":
                             id_Sugars = (String) nutrient.get("name");
                             value_Sugars = foodNutrient.get("amount").toString();
-                            sugars.setText(value_Sugars);
+                            sugars.setText(value_Sugars+"  g");
                             break;
                         case "204":
                             id_Fat = (String) nutrient.get("name");
                             value_fat = foodNutrient.get("amount").toString();
-                            fat.setText(value_fat);
+                            fat.setText(value_fat+"  g");
                             break;
                         case "205":
                             id_Carbohydrate = (String) nutrient.get("name");
                             value_Carbohydrate = foodNutrient.get("amount").toString();
-                            carbohydrate.setText(value_Carbohydrate);
+                            carbohydrate.setText(value_Carbohydrate+"  g");
                             break;
                     }
                 }

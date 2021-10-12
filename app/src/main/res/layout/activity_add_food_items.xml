@@ -41,7 +41,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="3dp"
-        android:layout_marginLeft="317dp"
+        android:layout_marginLeft="350dp"
         android:background="@drawable/ic_info1" />
 
 
@@ -68,10 +68,7 @@
         app:srcCompat="@drawable/pag1" />
 
 
-
-
     <include layout="@layout/content_add_food_items" />
-
 
 
 </RelativeLayout>

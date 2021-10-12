@@ -1,5 +1,6 @@
 package com.example.final_project2;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,10 +17,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +47,19 @@ public class AddFoodItems extends AppCompatActivity {
     private Button About;
     private Button Menu;
 
+    private ArrayList<Meal> mMeal;
+    private ProgressDialog mProgressDialog;
+    private ArrayList<Upload> mUploads;
+    private FirebaseUser user;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_items);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
 
         About = (Button) findViewById(R.id.btnAbout);
@@ -133,8 +152,8 @@ public class AddFoodItems extends AppCompatActivity {
 
                             case R.id.program_diet_item:
 
-                                // need to do
-                                Toast.makeText(AddFoodItems.this, "Need to do", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AddFoodItems.this, "program diet", Toast.LENGTH_LONG).show();
+                                dietProgram();
                                 return true;
 
                             case R.id.settings_item:
@@ -173,5 +192,89 @@ public class AddFoodItems extends AppCompatActivity {
         });
 
     }
+
+
+    private void dietProgram() {
+        mUploads = new ArrayList<>();
+        mMeal = new ArrayList<>();
+        readData(FirebaseDatabase.getInstance().getReference("images/" + user.getUid()), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                mUploads.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    final Upload upload = postSnapshot.getValue(Upload.class);
+                    upload.setKey(postSnapshot.getKey());
+                    mUploads.add(upload);
+                    // nutritionalValuesFromFirebase(upload.getName());
+                    readData(FirebaseDatabase.getInstance().getReference().child("nutritional_values").child(upload.getName()), new OnGetDataListener() {
+                        @Override
+                        public void onStart() {
+                        }
+
+                        @Override
+                        public void onSuccess(DataSnapshot data) {
+                            FoodModel foodModel = data.getValue(FoodModel.class);
+                            Log.d("MealMenu", data.getValue(FoodModel.class).toString());
+                            // [START_EXCLUDE]
+                            if (foodModel == null) {
+                                // User is null, error out
+                                Toast.makeText(AddFoodItems.this, "No Data", Toast.LENGTH_LONG).show();
+                            } else {
+                                mMeal.add(new Meal(upload.getName(), foodModel.getEnergy()));
+                            }
+                            if (mUploads.size() == mMeal.size()) {
+                                mProgressDialog.dismiss();
+                                Intent intentProgramDiet = new Intent(AddFoodItems.this, MealMenu.class);
+                                Bundle args = new Bundle();
+                                args.putSerializable("mMeal", (Serializable) mMeal);
+                                args.putSerializable("mUploads", (Serializable) mUploads);
+                                intentProgramDiet.putExtra("BUNDLE", args);
+                                // intentProgramDiet.putParcelableArrayListExtra("mMeal", mMeal);
+                                //intentProgramDiet.putParcelableArrayListExtra("mUploads", mUploads);
+                                startActivity(intentProgramDiet);
+                            }
+                        }
+
+                        @Override
+                        public void onFailed(DatabaseError databaseError) {
+
+                        }
+                    });
+                    // mProgressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailed(DatabaseError databaseError) {
+
+            }
+
+            @Override
+            public void onStart() {
+                //when starting
+                mProgressDialog = new ProgressDialog(AddFoodItems.this);
+                mProgressDialog.setMessage("Retrieving data...");
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
+            }
+        });
+
+    }
+
+    public void readData(DatabaseReference mDatabase, final OnGetDataListener listener) {
+        listener.onStart();
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailed(databaseError);
+            }
+        });
+    }
+
 
 }

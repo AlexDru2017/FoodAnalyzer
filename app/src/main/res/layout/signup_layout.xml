@@ -136,18 +136,15 @@
         android:text="@string/Register" />
 
 
-
-
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="175dp"
         android:layout_height="195dp"
-        android:layout_marginBottom="1000dp"
         android:layout_marginLeft="-80dp"
-        android:layout_marginTop="520dp"
-        app:srcCompat="@drawable/salad"
-        android:contentDescription="@string/todo1" />
+        android:layout_marginTop="640dp"
+        android:layout_marginBottom="1000dp"
+        android:contentDescription="@string/todo1"
+        app:srcCompat="@drawable/salad" />
     |>
 
     <Button

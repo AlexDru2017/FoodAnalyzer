@@ -128,7 +128,7 @@ public class HomePage extends AppCompatActivity {
                                 return true;
 
                             case R.id.program_diet_item:
-                                Toast.makeText(HomePage.this, "program diet item", Toast.LENGTH_LONG).show();
+                                Toast.makeText(HomePage.this, "program diet", Toast.LENGTH_LONG).show();
                                 dietProgram();
 
                                 // need to do

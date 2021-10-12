@@ -48,7 +48,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="317dp"
-        android:layout_marginLeft="317dp"
+        android:layout_marginLeft="350dp"
         android:layout_marginTop="3dp"
         android:background="@drawable/ic_info1" />
 
